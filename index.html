@@ -37,7 +37,7 @@
             border-radius: 1.2rem;
             box-shadow: 0 0 20px rgba(77, 240, 249, 0.15);
             width: 90%;
-            max-width: calc(100% - 100px); /* Match transmission line length */
+            max-width: calc(100% - 100px);
             margin: 0 auto 2rem;
             transition: all 0.3s ease;
         }
@@ -58,24 +58,23 @@
         }
 
         .combined-config .slider-container {
-            margin-bottom: 1.5rem;  /* Added spacing */
+            margin-bottom: 1.5rem;
         }
 
         .config-group {
-            gap: 1.2rem;  /* Added gap between child elements */
+            gap: 1.2rem;
         }
         .control-section h3 {
             text-align: center;
             justify-content: center;
-            margin-left: -0.5rem; /* Counteract icon margin */
+            margin-left: -0.5rem;
         }
 
         .control-section .icon-animated {
-            margin-right: 8px; /* Maintain icon spacing */
+            margin-right: 8px;
             margin-left: 0;
         }
 
-        /* Center metric labels and values */
         .metric .label,
         .metric .value {
             text-align: center;
@@ -95,7 +94,6 @@
             justify-content: center;
         }
 
-        /* Force last two metrics to new row */
         .metric:nth-child(4),
         .metric:nth-child(5) {
             grid-column: span 1;
@@ -181,77 +179,77 @@
         }
 
         .input-group {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        min-width: 200px;
-        margin-bottom: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 200px;
+            margin-bottom: 1.5rem;
         }
 
         .input-group label {
-        font-weight: bold;
-        margin-bottom: 0.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
         }
 
         .input-group input {
-        width: 100%;
-        padding: 0.6rem;
-        background: #3a3a3a;
-        color: #fff;
-        border-radius: 0.5rem;
-        border: none;
+            width: 100%;
+            padding: 0.6rem;
+            background: #3a3a3a;
+            color: #fff;
+            border-radius: 0.5rem;
+            border: none;
         }
 
         .slider-container {
-        display: flex;
-        flex-direction: column;
+            display: flex;
+            flex-direction: column;
         }
 
         .slider-container label {
-        font-weight: 500;
-        margin-bottom: 0.5rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
         }
 
         .slider-container input[type="range"] {
-        width: 100%;
+            width: 100%;
         }
 
         #resultsPanel {
-        background: #2a2a2a;
-        padding: 1.5rem;
-        border-radius: 1rem;
-        width: 100%;  /* Full width to extend across the screen */
-        max-width: 1000px;
-        margin-top: 2rem;
+            background: #2a2a2a;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 2rem;
         }
 
         #resultsPanel h3 {
-        color: #79ffe1;
-        margin-bottom: 1rem;
+            color: #79ffe1;
+            margin-bottom: 1rem;
         }
 
         #resultsPanel p {
-        margin: 0.5rem 0;
+            margin: 0.5rem 0;
         }
 
         input[type="number"] {
-        width: auto;
-        max-width: 80px;
-        margin-left: 10px;
+            width: auto;
+            max-width: 80px;
+            margin-left: 10px;
         }
 
         .min-max {
-        display: flex;
-        justify-content: space-between;
-        font-size: 0.75em;
-        color: #aaa;
-        margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75em;
+            color: #aaa;
+            margin-bottom: 5px;
         }
 
        body {
             font-family: 'Poppins', sans-serif;
             background: url('background.jpg') no-repeat center center fixed;
-            background-size: cover;              /* Ensures full stretch */
+            background-size: cover;       
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -271,7 +269,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(13, 13, 13, 0.6); /* semi-transparent dark overlay */
+            background: rgba(13, 13, 13, 0.6); 
             z-index: -1;
         }
 
@@ -340,7 +338,6 @@
             font-weight: 500;
         }
 
-
         .slider-container .min-max {
             display: flex;
             justify-content: space-between;
@@ -357,6 +354,7 @@
 
         input[type="range"] {
             width: 100%;
+            margin-bottom: 0.5rem;
             appearance: none;
             -webkit-appearance: none;
             background: transparent;
@@ -428,7 +426,7 @@
         }
 
         .section-header::before {
-            content: "\26A1 "; /* ⚡ */
+            content: "\26A1 ";
             color: #ffdc00;
             font-size: 1.2em;
             margin-right: 5px;
@@ -499,20 +497,17 @@
             animation: iconPulse 2.5s ease-in-out infinite;
         }
 
-        /* Smooth transitions for sliders and inputs */
         input[type="range"],
         input[type="number"] {
             transition: all 0.3s ease;
         }
 
-        /* Smooth color transitions for interactive elements */
         .load-input-group,
         canvas,
         .tooltip {
             transition: all 0.4s ease;
         }
 
-        /* Tooltip fading */
         .tooltip {
             opacity: 0;
             transform: translateY(-10px);
@@ -542,8 +537,8 @@
             border-color: #4df0f9;
         }
 
-        
     </style>
+    
 </head>
 <body>
     <div class="overlay"></div>
@@ -551,10 +546,8 @@
         <h1><span class="title-icon">⚡</span> Transmission Line Power Factor Correction Simulator</h1>
     </div>
 
-
     <div class="control-panel">
         <div class="controls-grid">
-            <!-- Combined Configuration & Parameters -->
             <div class="control-section combined-config">
                 <div class="config-column">
                     <h3><span class="icon-animated">⚙️</span>Configuration & Parameters</h3>
@@ -589,8 +582,6 @@
                 </div>
             </div>
     
-            <!-- System Summary -->
-             
             <div class="control-section results">
                 <h3><span class="icon-animated">📊</span>System Summary</h3>
                 <div class="summary-grid">
@@ -623,7 +614,6 @@
         </div>
     </div>
     
-    
     <div class="diagram-container">
         <div class="diagram-title">
             <h3><span class="icon-animated">📏</span> Single Line Diagram</h3>
@@ -634,8 +624,6 @@
 
     <div class="load-controls" id="loadControls"></div>
 
-   
-
     <script>
         const canvas = document.getElementById('mainCanvas');
         const ctx = canvas.getContext('2d');
@@ -644,12 +632,10 @@
         let animationOffset = 0;
         let glowPulse = 0;
 
-        
         function initCanvas() {
             canvas.width = canvas.offsetWidth;
             canvas.height = canvas.offsetHeight;
         }
-        
         
         function drawAnimatedLine() {
             const midY = canvas.height / 2;
@@ -669,13 +655,10 @@
             const wavelength = 80;
             const speed = -1.2;
 
-            const startX = 50; // Starting from the vertical source line
-            const loadX = canvas.width - 50; // Stop here at the vertical load line
-
-            // Only animate color stop, not position
+            const startX = 50; 
+            const loadX = canvas.width - 50; 
             const sineOffset = 0.5 + 0.5 * Math.sin((animationOffset) / 20);
-
-            // Fixed gradient range across the static line
+            
             const gradient = ctx.createLinearGradient(50, midY, canvas.width - 50, midY);
             gradient.addColorStop(0, '#00f9ff');
             gradient.addColorStop(sineOffset, '#ff00cc');
@@ -693,7 +676,6 @@
                     ctx.lineTo(x, y);
                 }
             }
-
             ctx.stroke();
         }
 
@@ -701,23 +683,14 @@
             const midY = canvas.height / 2;
             const voltage = document.getElementById('voltage').value;
             ctx.fillStyle = '#4df0f9';
-            // Vertical line (source)
-
-            const maxVoltage = 12000; // Maximum voltage (12000V)
-            const targetVoltage = 230; // The voltage you want to correspond to cyan (#4df0f9)
-            const maxHue = 190; // Hue value corresponding to cyan (#4df0f9)
-
-            // Calculate the proportion of the voltage compared to maxVoltage
-            const voltageProportion = voltage / maxVoltage;
-
-            // Adjust the hue so that 230V corresponds to cyan
-            const hue = ((voltage / targetVoltage) * maxHue) % 360;
-
-            // Animate glow using sine wave
-            const glowStrength = 10 + 5 * Math.sin(glowPulse / 10); // Pulsating glow
-
-            // Set stroke color dynamically based on voltage
             
+            const maxVoltage = 12000; 
+            const targetVoltage = 230;
+            const maxHue = 190; 
+            
+            const voltageProportion = voltage / maxVoltage;
+            const hue = ((voltage / targetVoltage) * maxHue) % 360;
+            const glowStrength = 10 + 5 * Math.sin(glowPulse / 10); 
 
             ctx.beginPath();
             ctx.moveTo(50, midY - 100);
@@ -725,15 +698,10 @@
             ctx.strokeStyle = `hsl(${hue}, 80%, 50%)`;
             ctx.lineWidth = 4;
             ctx.shadowColor = '#4df0f9';
-            ctx.shadowBlur = glowStrength; // Animate this
+            ctx.shadowBlur = glowStrength;
             ctx.stroke();
 
-            // Horizontal transmission line
-            //drawAnimatedLine();
-
             ctx.shadowBlur = 0;
-
-            // System voltage label
             
             ctx.fillStyle = '#4df0f9';
             ctx.font = '14px Arial';
@@ -746,9 +714,9 @@
             const loadY = midY + 100;
 
             const gradient = ctx.createLinearGradient(x, midY, x, loadY);
-            gradient.addColorStop(0, '#4df0f9');       // starting color at the transmission line
+            gradient.addColorStop(0, '#4df0f9');     
             gradient.addColorStop(0.5 + 0.5 * Math.sin((animationOffset - 2) / 20), '#8e2de2');
-            gradient.addColorStop(1, '#4df0f9');       // color at the load
+            gradient.addColorStop(1, '#4df0f9');   
 
             ctx.beginPath();
             ctx.moveTo(x, midY);
@@ -759,7 +727,6 @@
         }
         
         function drawLoad(x, power, pf, index) {
-            // Draw connection line
             ctx.beginPath();
             ctx.moveTo(x, canvas.height/2);
             ctx.lineTo(x, canvas.height/2 + 80);
@@ -767,14 +734,11 @@
             ctx.lineWidth = 2;
             ctx.stroke();
 
-            // Draw load circle (highlight if active)
             ctx.beginPath();
             ctx.arc(x, canvas.height/2 + 100 + ( power / 1000 ), 15 + ( power / 1000 ), 0, Math.PI * 2);
-            
             ctx.fillStyle = index === activeLoadIndex ? `hsl(${(1 - pf) * 120}, 80%, 75%)` : `hsl(${(1 - pf) * 120}, 80%, 50%)`;
             ctx.fill();
 
-            // Draw load label
             ctx.fillStyle = '#fff';
             ctx.font = '12px Arial';
             ctx.textAlign = 'center';
@@ -786,7 +750,6 @@
             drawTransmissionLine();
             drawAnimatedLine();
             drawAnimatedWaveform();
-            
             
             const spacing = (canvas.width - 100) / (loads.length + 1);
             loads.forEach((load, i) => {
@@ -815,10 +778,8 @@
             const targetQ = totalP * Math.tan(Math.acos(requiredPF));
             const requiredQ = Math.abs(totalQ - targetQ);
 
-            // Capacitance in µF
             const C = (requiredQ * 1000 * 1000000) / (2 * Math.PI * frequency * ((voltage)**2));
 
-            // Update DOM
             document.getElementById('totalP').textContent = totalP.toFixed(2);
             document.getElementById('totalQ').textContent = totalQ.toFixed(2);
             document.getElementById('currentPF').textContent = currentPF.toFixed(3);
@@ -870,88 +831,66 @@
                 container.appendChild(div);
             });
 
-            // Add event listeners for both inputs and sliders
             document.querySelectorAll('.load-power').forEach(input => {
             input.addEventListener('input', function() {
                 const index = this.dataset.index;
                 const value = parseFloat(this.value);
                 loads[index].power = value;
-                // Update corresponding input field
                 document.querySelector(`.load-power-input[data-index="${index}"]`).value = value;
                 updateDiagram();
                 updateSystemSummary();
             });
         });
 
-        document.querySelectorAll('.load-power-input').forEach(input => {
-            input.addEventListener('input', function() { // Changed to 'input' event
-                const index = this.dataset.index;
-                const value = Math.min(10000, Math.max(1, parseFloat(this.value) || 1));
-                this.value = value; // Ensure input shows clamped value
-                loads[index].power = value;
-                // Update corresponding slider
-                document.querySelector(`.load-power[data-index="${index}"]`).value = value;
-                updateDiagram();
-                updateSystemSummary();
+            document.querySelectorAll('.load-power-input').forEach(input => {
+                input.addEventListener('input', function() {
+                    const index = this.dataset.index;
+                    const value = Math.min(10000, Math.max(1, parseFloat(this.value) || 1));
+                    this.value = value;
+                    loads[index].power = value;
+                    document.querySelector(`.load-power[data-index="${index}"]`).value = value;
+                    updateDiagram();
+                    updateSystemSummary();
+                });
             });
-        });
 
-        // Repeat the same pattern for power factor
-        document.querySelectorAll('.load-pf').forEach(input => {
-            input.addEventListener('input', function() {
-                const index = this.dataset.index;
-                const value = parseFloat(this.value);
-                loads[index].pf = value;
-                document.querySelector(`.load-pf-input[data-index="${index}"]`).value = value.toFixed(2);
-                updateDiagram();
-                updateSystemSummary();
+            document.querySelectorAll('.load-pf').forEach(input => {
+                input.addEventListener('input', function() {
+                    const index = this.dataset.index;
+                    const value = parseFloat(this.value);
+                    loads[index].pf = value;
+                    document.querySelector(`.load-pf-input[data-index="${index}"]`).value = value.toFixed(2);
+                    updateDiagram();
+                    updateSystemSummary();
+                });
             });
-        });
 
-        document.querySelectorAll('.load-pf-input').forEach(input => {
-            input.addEventListener('input', function() {
-                const index = this.dataset.index;
-                let value = parseFloat(this.value) || 0.7; // Default to 0.7 if invalid
-                value = Math.min(1, Math.max(0.01, value)); // Clamp between
-                this.value = value.toFixed(2); // Force 2 decimal places
-                loads[index].pf = value;
-                document.querySelector(`.load-pf[data-index="${index}"]`).value = value;
-                updateDiagram();
-                updateSystemSummary();
+            document.querySelectorAll('.load-pf-input').forEach(input => {
+                input.addEventListener('input', function() {
+                    const index = this.dataset.index;
+                    let value = parseFloat(this.value) || 0.7; 
+                    value = Math.min(1, Math.max(0.01, value)); 
+                    this.value = value.toFixed(2);
+                    loads[index].pf = value;
+                    document.querySelector(`.load-pf[data-index="${index}"]`).value = value;
+                    updateDiagram();
+                    updateSystemSummary();
+                });
             });
-        });
-    }
-
-        function updateCapacitance(index) {
-            const load = loads[index];
-            const voltage = document.getElementById('voltage').value;
-            const frequency = document.getElementById('frequency').value;
-            const capacitance = calculateCapacitance(load.power, load.pf, voltage, frequency);
-            document.getElementById(`capacitanceValue${index}`).textContent = capacitance.toFixed(2) + ' µF';
         }
 
-        function calculateCapacitance(power, pf, voltage, frequency) {
-            const reactivePower = power * Math.tan(Math.acos(pf));
-            const C = reactivePower * 1e6 / (2 * Math.PI * frequency * (voltage * 1e3)**2);
-            return C * 1e6; // Convert to µF
-        }
-
-        // Event listeners
         document.getElementById('loadCount').addEventListener('input', function() {
             const count = parseInt(this.value);
             const previousCount = loads.length;
 
-            // Preserve existing loads
             if (count > previousCount) {
-                // Add new loads with defaults
                 for (let i = previousCount; i < count; i++) {
                     loads.push({ power: 50, pf: 0.95 });
                 }
             } else {
-                // Remove extra loads
                 loads.length = count;
-
             }
+            
             document.getElementById('loadCountValue').textContent = count; 
             createLoadControls();
             updateDiagram();
@@ -965,77 +904,73 @@
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             const spacing = (canvas.width - 100) / (loads.length + 1);
-            
             document.getElementById('voltage').addEventListener('input', () => {
             updateDiagram();
             updateSystemSummary();
             document.getElementById('requiredPF').addEventListener('input', updateSystemSummary);
         });
 
-    let found = false;
-    let newActiveIndex = -1;
-    let tooltipHTML = '';
-    let tooltipX = e.clientX + 20;
-    let tooltipY = -e.clientY/3 +400;
+            let found = false;
+            let newActiveIndex = -1;
+            let tooltipHTML = '';
+            let tooltipX = e.clientX + 20;
+            let tooltipY = -e.clientY/3 +400;
 
-    loads.forEach((load, i) => {
-        const loadX = 50 + spacing * (i + 1);
-        const distance = Math.sqrt((x - loadX)**2 + (y - (canvas.height/2 + 100))**2);
+            loads.forEach((load, i) => {
+                const loadX = 50 + spacing * (i + 1);
+                const distance = Math.sqrt((x - loadX)**2 + (y - (canvas.height/2 + 100))**2);
 
-        if(distance < 20) {
-            found = true;
-            newActiveIndex = i;
+                if(distance < 20) {
+                    found = true;
+                    newActiveIndex = i;
+                    
+                    tooltipHTML = `
+                        <h4>Load ${i+1}</h4>
+                        <p><strong>Power:</strong> ${load.power} kW</p>
+                        <p><strong>PF:</strong> ${load.pf.toFixed(2)}</p>
+                    `;
+                }
+            });
+
+            const tooltip = document.getElementById('tooltip');
+            if (found) {
+                activeLoadIndex = newActiveIndex;
+                tooltip.innerHTML = tooltipHTML;
+                tooltip.classList.add('show');
+                tooltip.style.display = 'block';
+                tooltip.style.left = `${tooltipX}px`;
+                tooltip.style.top = `${tooltipY}px`;
+            } 
             
+            else if (activeLoadIndex !== -1) {
+                activeLoadIndex = -1;
+                tooltip.classList.remove('show');
+                setTimeout(() => {
+                tooltip.style.display = 'none';
+                }, 300);
+            }
 
-            tooltipHTML = `
-                <h4>Load ${i+1}</h4>
-                <p><strong>Power:</strong> ${load.power} kW</p>
-                <p><strong>PF:</strong> ${load.pf.toFixed(2)}</p>
-            `;
-        }
-    });
+            updateDiagram();
+            updateSystemSummary();
 
-    const tooltip = document.getElementById('tooltip');
-    if (found) {
-        activeLoadIndex = newActiveIndex;
-        tooltip.innerHTML = tooltipHTML;
-        tooltip.classList.add('show');
-        tooltip.style.display = 'block';
-        tooltip.style.left = `${tooltipX}px`;
-        tooltip.style.top = `${tooltipY}px`;
-    } else if (activeLoadIndex !== -1) {
-        activeLoadIndex = -1;
-        tooltip.classList.remove('show');
-        setTimeout(() => {
-        tooltip.style.display = 'none';
-        }, 300); // Matches the transition duration
-    }
-
-    updateDiagram();
-    updateSystemSummary();
-
-});
-
+        });
 
         canvas.addEventListener('mouseleave', () => {
             activeLoadIndex = -1;
             document.getElementById('tooltip').style.display = 'none';
             updateDiagram();
-            updateSystemSummary();
-            
+            updateSystemSummary();  
         });
 
-        // Initial setup
         initCanvas();
         window.addEventListener('resize', initCanvas);
         document.getElementById('requiredPF').addEventListener('input', updateSystemSummary);
         document.getElementById('loadCount').dispatchEvent(new Event('input'));
 
-
         function animate() {
             const frequency = document.getElementById('frequency').value;
             animationOffset += 4 * (frequency / 50);
-            glowPulse += 1; // update glow phase
+            glowPulse += 1;
             updateDiagram();
             requestAnimationFrame(animate);
         }
