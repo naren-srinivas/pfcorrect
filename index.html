@@ -12,7 +12,7 @@
             text-align: center;
             margin-bottom: 2rem;
             padding: 1rem 0;
-            background: linear-gradient(135deg, #1c1c1e 0%, #2b2b2e 100%);
+            background: linear-gradient(135deg, #000000 0%, #151516 100%);
             border-bottom: 2px solid #4df0f9;
         }
 
@@ -32,7 +32,7 @@
             animation: iconPulse 2.5s ease-in-out infinite;
         }
        .control-panel {
-            background: #1c1c1e;
+            background: #000000;
             padding: 1.5rem;
             border-radius: 1.2rem;
             box-shadow: 0 0 20px rgba(77, 240, 249, 0.15);
@@ -50,7 +50,7 @@
         }
 
         .control-section {
-            background: #2b2b2e;
+            background: #151516;
             padding: 1.5rem;
             border-radius: 1rem;
             border: 1px solid #363638;
@@ -99,6 +99,11 @@
         .metric:nth-child(4),
         .metric:nth-child(5) {
             grid-column: span 1;
+        }
+        @media (max-width: 480px) {
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -245,7 +250,11 @@
 
        body {
             font-family: 'Poppins', sans-serif;
-            background: #0d0d0d;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;              /* Ensures full stretch */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             margin: 0;
             padding: 20px;
             padding-top: 0;
@@ -256,8 +265,18 @@
             transition: background 0.3s ease;
         }
 
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 13, 13, 0.6); /* semi-transparent dark overlay */
+            z-index: -1;
+        }
+
         .controls {
-            background: #1c1c1e;
+            background: #000000;
             padding: 25px;
             border-radius: 12px;
             box-shadow: 0 0 12px rgba(77, 240, 249, 0.15);
@@ -268,10 +287,11 @@
         }
 
         .diagram-container {
-            background: #1a1a1a;
+            background: #040404;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: inset 0 0 30px rgba(77, 240, 249, 0.05);
+            
+            box-shadow: 0 0 30px rgba(77, 240, 249, 0.15);
             width: 100%;
             height: 400px;
             position: relative;
@@ -287,12 +307,18 @@
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
-            margin-top: 20px;
+            margin-top: 25px;
             justify-content: center;
+            background: #000000;
+            padding: 1.5rem;
+            border-radius: 1.2rem;
+            box-shadow: 0 0 20px rgba(77, 240, 249, 0.15);
+            transition: all 0.3s ease;
         }
 
         .load-input-group {
-            background: #2b2b2e;
+            background: #151516;
+            border: 1px solid #363638;
             padding: 20px;
             border-radius: 10px;
             min-width: 250px;
@@ -308,9 +334,12 @@
         .slider-container label {
             display: flex;
             justify-content: space-between;
+            margin-top: 0;
             margin-bottom: 5px;
+            align-items: center;
             font-weight: 500;
         }
+
 
         .slider-container .min-max {
             display: flex;
@@ -513,16 +542,11 @@
             border-color: #4df0f9;
         }
 
-        .slider-container label {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 5px;
-        }
+        
     </style>
 </head>
 <body>
-
+    <div class="overlay"></div>
     <div class="page-header">
         <h1><span class="title-icon">⚡</span> Transmission Line Power Factor Correction Simulator</h1>
     </div>
@@ -549,7 +573,7 @@
                         
                         <div class="input-group">
                             <label>
-                                <span class="icon-animated">⚡</span>Voltage (kV)
+                                <span class="icon-animated">⚡</span>Voltage (V)
                                 <input type="number" id="voltage" value="230" min="66" step="1">
                             </label>
                             <label>
@@ -566,6 +590,7 @@
             </div>
     
             <!-- System Summary -->
+             
             <div class="control-section results">
                 <h3><span class="icon-animated">📊</span>System Summary</h3>
                 <div class="summary-grid">
@@ -616,58 +641,107 @@
         const ctx = canvas.getContext('2d');
         let loads = [];
         let activeLoadIndex = -1;
+        let animationOffset = 0;
+        let glowPulse = 0;
+
         
         function initCanvas() {
             canvas.width = canvas.offsetWidth;
             canvas.height = canvas.offsetHeight;
         }
         
-        let animationOffset = 0;
-
+        
         function drawAnimatedLine() {
             const midY = canvas.height / 2;
             const lineLength = canvas.width - 100;
 
-            // Create a gradient that moves
-            const gradient = ctx.createLinearGradient(50 + animationOffset, midY, 50 + lineLength + animationOffset, midY);
-            gradient.addColorStop(0, '#4df0f9');
-            gradient.addColorStop(0.5, '#8e2de2');
-            gradient.addColorStop(1, '#4df0f9');
-
             ctx.beginPath();
             ctx.moveTo(50, midY);
             ctx.lineTo(canvas.width - 50, midY);
-            ctx.strokeStyle = gradient;
+            ctx.strokeStyle = '#00d4e6';
             ctx.lineWidth = 4;
             ctx.stroke();
         }
+
+        function drawAnimatedWaveform() {
+            const midY = canvas.height / 2;
+            const amplitude = 8;
+            const wavelength = 80;
+            const speed = -1.2;
+
+            const startX = 50; // Starting from the vertical source line
+            const loadX = canvas.width - 50; // Stop here at the vertical load line
+
+            // Only animate color stop, not position
+            const sineOffset = 0.5 + 0.5 * Math.sin((animationOffset) / 20);
+
+            // Fixed gradient range across the static line
+            const gradient = ctx.createLinearGradient(50, midY, canvas.width - 50, midY);
+            gradient.addColorStop(0, '#00f9ff');
+            gradient.addColorStop(sineOffset, '#ff00cc');
+            gradient.addColorStop(1, '#00f9ff');
+
+            ctx.beginPath();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = gradient;
+
+            for (let x = startX; x <= loadX; x++) {
+                const y = midY + amplitude * Math.sin((x + (animationOffset - 3) * speed) / wavelength * 2 * Math.PI);
+                if (x === startX) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+
+            ctx.stroke();
+        }
+
         function drawTransmissionLine() {
             const midY = canvas.height / 2;
-
+            const voltage = document.getElementById('voltage').value;
+            ctx.fillStyle = '#4df0f9';
             // Vertical line (source)
+
+            const maxVoltage = 12000; // Maximum voltage (12000V)
+            const targetVoltage = 230; // The voltage you want to correspond to cyan (#4df0f9)
+            const maxHue = 190; // Hue value corresponding to cyan (#4df0f9)
+
+            // Calculate the proportion of the voltage compared to maxVoltage
+            const voltageProportion = voltage / maxVoltage;
+
+            // Adjust the hue so that 230V corresponds to cyan
+            const hue = ((voltage / targetVoltage) * maxHue) % 360;
+
+            // Animate glow using sine wave
+            const glowStrength = 10 + 5 * Math.sin(glowPulse / 10); // Pulsating glow
+
+            // Set stroke color dynamically based on voltage
+            
+
             ctx.beginPath();
             ctx.moveTo(50, midY - 100);
             ctx.lineTo(50, midY + 100);
-            ctx.strokeStyle = '#4df0f9';
+            ctx.strokeStyle = `hsl(${hue}, 80%, 50%)`;
             ctx.lineWidth = 4;
             ctx.shadowColor = '#4df0f9';
-            ctx.shadowBlur = 10;
+            ctx.shadowBlur = glowStrength; // Animate this
             ctx.stroke();
 
             // Horizontal transmission line
-            drawAnimatedLine();
+            //drawAnimatedLine();
 
             ctx.shadowBlur = 0;
 
             // System voltage label
-            const voltage = document.getElementById('voltage').value;
+            
             ctx.fillStyle = '#4df0f9';
             ctx.font = '14px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText(`${voltage} kV`, 50, midY + 120);
+            ctx.fillText(`${voltage} V`, 50, midY + 120);
         }
 
-        function drawLoadLine(x) {
+        function drawLoadLine(x, power) {
             const midY = canvas.height / 2;
             const loadY = midY + 100;
 
@@ -682,7 +756,8 @@
             ctx.strokeStyle = gradient;
             ctx.lineWidth = 4;
             ctx.stroke();
-}
+        }
+        
         function drawLoad(x, power, pf, index) {
             // Draw connection line
             ctx.beginPath();
@@ -694,25 +769,29 @@
 
             // Draw load circle (highlight if active)
             ctx.beginPath();
-            ctx.arc(x, canvas.height/2 + 100, 15, 0, Math.PI * 2);
-            ctx.fillStyle = index === activeLoadIndex ? '#ff0' : `hsl(${(1 - pf) * 120}, 80%, 50%)`;
+            ctx.arc(x, canvas.height/2 + 100 + ( power / 1000 ), 15 + ( power / 1000 ), 0, Math.PI * 2);
+            
+            ctx.fillStyle = index === activeLoadIndex ? `hsl(${(1 - pf) * 120}, 80%, 75%)` : `hsl(${(1 - pf) * 120}, 80%, 50%)`;
             ctx.fill();
 
             // Draw load label
             ctx.fillStyle = '#fff';
             ctx.font = '12px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText(`${power}kW`, x, canvas.height/2 + 130);
+            ctx.fillText(`${power}kW`, x, canvas.height/2 + 130 + ( power / 500 ));
         }
 
         function updateDiagram() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawTransmissionLine();
+            drawAnimatedLine();
+            drawAnimatedWaveform();
+            
             
             const spacing = (canvas.width - 100) / (loads.length + 1);
             loads.forEach((load, i) => {
                 const x = 50 + spacing * (i + 1);
-                drawLoadLine(x);
+                drawLoadLine(x, load.power);
                 drawLoad(x, load.power, load.pf, i);
             });
         }
@@ -734,10 +813,10 @@
             const currentPF = totalP / apparentPower;
 
             const targetQ = totalP * Math.tan(Math.acos(requiredPF));
-            const requiredQ = totalQ - targetQ;
+            const requiredQ = Math.abs(totalQ - targetQ);
 
             // Capacitance in µF
-            const C = (requiredQ * 1000) / (2 * Math.PI * frequency * ((voltage)**2));
+            const C = (requiredQ * 1000 * 1000000) / (2 * Math.PI * frequency * ((voltage)**2));
 
             // Update DOM
             document.getElementById('totalP').textContent = totalP.toFixed(2);
@@ -773,7 +852,7 @@
                     </div>
                     <div class="slider-container">
                         <label>
-                            Power Factor:
+                            Power Factor (Lag):
                             <input type="number" class="load-pf-input" 
                                 min="0.2" max="1" step="0.01" 
                                 value="${load.pf.toFixed(2)}" 
@@ -897,7 +976,7 @@
     let newActiveIndex = -1;
     let tooltipHTML = '';
     let tooltipX = e.clientX + 20;
-    let tooltipY = e.clientY - 300;
+    let tooltipY = -e.clientY/3 +400;
 
     loads.forEach((load, i) => {
         const loadX = 50 + spacing * (i + 1);
@@ -954,10 +1033,13 @@
 
 
         function animate() {
-    animationOffset += 4; // Adjust speed here
-    updateDiagram();
-    requestAnimationFrame(animate);
-}
+            const frequency = document.getElementById('frequency').value;
+            animationOffset += 4 * (frequency / 50);
+            glowPulse += 1; // update glow phase
+            updateDiagram();
+            requestAnimationFrame(animate);
+        }
+
         initCanvas();
         animate();
     </script>
