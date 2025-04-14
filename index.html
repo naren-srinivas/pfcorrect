@@ -737,7 +737,7 @@
             const requiredQ = totalQ - targetQ;
 
             // Capacitance in µF
-            const C = (requiredQ * 1000 *1000000) / (2 * Math.PI * frequency * ((voltage)**2));
+            const C = (requiredQ * 1000) / (2 * Math.PI * frequency * ((voltage)**2));
 
             // Update DOM
             document.getElementById('totalP').textContent = totalP.toFixed(2);
